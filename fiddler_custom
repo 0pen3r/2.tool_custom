@@ -1,0 +1,27 @@
+    static function OnBeforeResponse(oSession: Session) {
+        if (m_Hide304s && oSession.responseCode == 304) {
+            oSession["ui-hide"] = "true";
+        }
+       
+        // Critical vulnerable words HighLight & Alert Test 20220405---------------------------------------------------------soo/
+        if (oSession.uriContains("download") || oSession.uriContains("upload")) {
+            oSession["ui-color"] = "Orange",
+            oSession["ui-backcolor"] = "black";
+            //FiddlerObject.alert("hmmmmmmmmmmm..")
+        }
+          
+        // vulnerable words{POST] HighLight & Alert Test 20220405---------------------------------------------------------modifying/
+        if (oSession.uriContains("download") || oSession.uriContains("upload")) {
+            oSession["ui-color"] = "Orange",
+            oSession["ui-backcolor"] = "black";
+            //FiddlerObject.alert("hmmmmmmmmmmm..")
+        }
+        
+                
+        // Content-Type:HighLight Test 20220404--------------------------------------------------------------------------soo/
+        if (oSession.oResponse.headers.ExistsAndContains("Content-Type","text/html")){
+            //oSession["ui-color"] = "red",
+            //oSession["ui-bold"] = "true",
+            oSession["ui-backcolor"] = "gray";	
+        }        
+    }
